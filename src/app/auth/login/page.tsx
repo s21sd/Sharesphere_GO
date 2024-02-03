@@ -1,12 +1,75 @@
 "use client"
 import Link from 'next/link';
 import React, { useState } from 'react';
+import { AppDispatch, useAppSelector } from '@/redux/store';
+import { UseDispatch, useDispatch } from 'react-redux';
+import { toast } from 'react-toastify'
+import { logIn, logOut } from '@/redux/features/auth-slice'
+import { useRouter } from 'next/navigation';
+
+interface FormData {
+    email: string;
+    password: string;
+}
 
 const Page = () => {
-    const [email, setEmail] = useState('');
-    const [passeword, setPassword] = useState('');
-    const handleLogin = () => {
-        console.log("login works")
+    const router = useRouter();
+    const auth = useAppSelector((state) => state.authReducer);
+    const dispatch = useDispatch<AppDispatch>();
+    const [formData, setFormData] = useState<FormData>({
+        email: '',
+        password: ''
+    });
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value
+        });
+    }
+    const handleLogin = async (e: any) => {
+        e.preventDefault();
+        // console.log("login works")
+        if (formData.email == '' || formData.password == '') {
+            toast.error('Please fill all the fields');
+            return
+        }
+        let res = await fetch(process.env.NEXT_PUBLIC_API_URL + '/auth/login', {
+            method: 'POST',
+            body: JSON.stringify({
+                email: formData.email,
+                password: formData.password
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include'
+
+        })
+        let data = await res.json();
+        if (data.ok) {
+            toast.success('Login ')
+            getUserData();
+        }
+        else {
+            toast.error(data.message);
+        }
+    }
+    const getUserData = async () => {
+        let res = await fetch(process.env.NEXT_PUBLIC_API_URL + '/auth/getuser', {
+            method: 'GET',
+            credentials: 'include'
+        })
+        let data = await res.json();
+        if (data.ok) {
+            dispatch(logIn(data.data));
+            router.push('/myfiles')
+        }
+        else {
+            dispatch(logOut());
+
+        }
+
     }
     return (
         <div className="flex items-center justify-center min-h-screen ">
@@ -19,7 +82,8 @@ const Page = () => {
                         name="email"
                         placeholder="Email"
                         required
-                        onChange={e => setEmail(e.target.value)}
+                        value={formData.email}
+                        onChange={handleInputChange}
                         className="p-2 mb-4 border-2 border-gray-300 rounded focus:outline-none focus:border-[#fb509a]"
                     />
                     <input
@@ -28,7 +92,8 @@ const Page = () => {
                         name="password"
                         placeholder="Password"
                         required
-                        onChange={e => setPassword(e.target.value)}
+                        value={formData.password}
+                        onChange={handleInputChange}
                         className="p-2 mb-4 border-2 border-gray-300 rounded focus:outline-none focus:border-[#fb509a]"
                     />
 
