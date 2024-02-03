@@ -3,11 +3,11 @@ import { usePathname, useRouter } from 'next/navigation';
 import React, { useState } from 'react'
 
 const Navbar = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(1);
+    const [isLoggedIn, setIsLoggedIn] = useState(0);
     const pathname = usePathname();
     const router = useRouter();
     return (
-        <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+        <div className="container mx-auto mt-4 flex flex-wrap p-5 flex-col md:flex-row items-center">
             <a className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
 
                 <button onClick={() => router.push('/')} className="mr-5 text-[32px] font-bold hover:text-gray-900 custom-btn btn-6"><span>ShareSphere</span></button>
