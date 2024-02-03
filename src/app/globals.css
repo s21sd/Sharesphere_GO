@@ -2,32 +2,105 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: black;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #E2E2E2, #C9D6FF);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #E2E2E2, #C9D6FF);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+.btn-6 {
+  background: rgb(247, 150, 192);
+  background: radial-gradient(circle, rgba(247, 150, 192, 1) 0%, rgba(118, 174, 241, 1) 100%);
+  padding: 5px;
+  line-height: 34px;
+  border: none;
+  border-radius: 22px;
+}
+
+.btn-6 span {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 3px 5px;
+  height: 100%;
+}
+
+.btn-6:before,
+.btn-6:after {
+  position: absolute;
+  content: "";
+  height: 0%;
+  width: 1px;
+  box-shadow:
+    -1px -1px 20px 0px rgb(145, 37, 37),
+    -4px -4px 5px 0px rgba(255, 255, 255, 1),
+    7px 7px 20px 0px rgba(0, 0, 0, .4),
+    4px 4px 5px 0px rgba(0, 0, 0, .3);
+}
+
+.btn-6:before {
+  right: 0;
+  top: 0;
+  transition: all 500ms ease;
+}
+
+.btn-6:after {
+  left: 0;
+  bottom: 0;
+  transition: all 500ms ease;
+}
+
+.btn-6:hover {
+  background: transparent;
+  color: #76aef1;
+  box-shadow: none;
+}
+
+.btn-6:hover:before {
+  transition: all 500ms ease;
+  height: 100%;
+}
+
+.btn-6:hover:after {
+  transition: all 500ms ease;
+  height: 100%;
+}
+
+.btn-6 span:before,
+.btn-6 span:after {
+  position: absolute;
+  content: "";
+  box-shadow:
+    -1px -1px 20px 0px rgb(162, 1, 1),
+    -4px -4px 5px 0px rgb(182, 25, 25),
+    7px 7px 20px 0px rgba(0, 0, 0, .4),
+    4px 4px 5px 0px rgba(0, 0, 0, .3);
+}
+
+.btn-6 span:before {
+  left: 0;
+  top: 0;
+  width: 0%;
+  height: .5px;
+  transition: all 500ms ease;
+}
+
+.btn-6 span:after {
+  right: 0;
+  bottom: 0;
+  width: 0%;
+  height: .5px;
+  transition: all 500ms ease;
+}
+
+.btn-6 span:hover:before {
+  width: 100%;
+}
+
+.btn-6 span:hover:after {
+  width: 100%;
 }
