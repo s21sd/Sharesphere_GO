@@ -8,8 +8,6 @@ import { logIn, logOut } from '@/redux/features/auth-slice'
 const Navbar = () => {
     const auth = useAppSelector((state) => state.authReducer);
     const dispatch = useDispatch<AppDispatch>();
-
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const pathname = usePathname();
     const router = useRouter();
     // const checkLogin = async () => {

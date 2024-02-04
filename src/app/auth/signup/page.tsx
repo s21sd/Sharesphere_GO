@@ -9,6 +9,7 @@ interface FormData {
   name: string,
   email: string;
   password: string;
+
 }
 const Page = () => {
   const router = useRouter();
@@ -16,18 +17,16 @@ const Page = () => {
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
-    password: ''
-  } as FormData);
+    password: '',
+  } as FormData)
 
   const [otp, setOtp] = useState('');
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
+    setFormData({ ...formData, [name]: value })
   }
   const [sendingOTP, setSendingOTP] = useState<boolean>(false);
+
   const sendOTP = async (e: any) => {
     e.preventDefault();
     setSendingOTP(true);
@@ -52,41 +51,36 @@ const Page = () => {
   }
   const handleSignup = async (e: any) => {
     e.preventDefault();
-    if (formData.email == '' || formData.name == '' || formData.password == '' || otp == '') {
-      toast.error('Please fill all the fields');
-      return;
+    if (formData.name == "" || formData.email == '' || formData.password == '' || otp == '') {
+      toast.error('Please fill all the fields')
+      return
     }
-    const form = new FormData();
-    form.append('name', formData.name)
-    form.append('email', formData.email)
-    form.append('password', formData.password)
-    form.append('otp', otp)
-    if (imgfile) {
-      form.append('clientfile', imgfile);
-    }
+    let formdata = new FormData();
 
+    formdata.append('name', formData.name);
+    formdata.append('email', formData.email);
+    formdata.append('password', formData.password);
+    formdata.append('otp', otp);
+    if (imgfile) {
+      formdata.append('clientfile', imgfile)
+    }
     let res = await fetch(process.env.NEXT_PUBLIC_API_URL + '/auth/register', {
       method: 'POST',
-      body: form,
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      body: formdata,
       credentials: 'include'
-
     })
-    console.log(res);
-    let data = await res.json();
+
+    let data = await res.json()
     if (data.ok) {
-      toast.success('Login ');
+      toast.success('Signup successful')
       router.push('/auth/login')
-
     }
+
     else {
-      toast.error(data.message);
+      toast.error(data.message)
     }
-
-
   }
+
   return (
     <div className="flex items-center justify-center min-h-screen ">
       {
@@ -102,7 +96,6 @@ const Page = () => {
             id="username"
             name="name"
             placeholder="Name"
-
             value={formData.name}
             onChange={handleInputChange}
             className="p-2 mb-4 border-2 border-gray-300 rounded focus:outline-none focus:border-[#fb509a]"
@@ -138,7 +131,6 @@ const Page = () => {
             id="OTP"
             name="OTP"
             placeholder="OTP"
-
             onChange={e => setOtp(e.target.value)}
             className="p-2 border-2 mb-4 border-gray-300 rounded focus:outline-none focus:border-[#fb509a]"
           />
@@ -153,15 +145,8 @@ const Page = () => {
             className="p-2 mb-4 border-2 border-gray-300 rounded focus:outline-none focus:border-[#fb509a]"
           />
 
-
-
-
-
-
-
           <button
             onClick={handleSignup}
-            type="submit"
             className="bg-gradient-to-br from-pink-500 to-blue-300  text-white p-2 border-none rounded-lg cursor-pointer transition duration-300 "
           >
             Sign Up
