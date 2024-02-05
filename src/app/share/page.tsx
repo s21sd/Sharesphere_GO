@@ -5,9 +5,16 @@ import { FaFileUpload } from "react-icons/fa";
 import { CiImport } from "react-icons/ci";
 import { MdDelete } from "react-icons/md";
 import { FaEye } from "react-icons/fa";
+import { useRouter } from 'next/navigation';
+import { toast } from 'react-toastify'
+import Lottie from "lottie-react";
+import Animation from "../../../public/Animation - 1707124384803.json"
 const page = () => {
+    const router = useRouter();
     const [file, setFile] = useState<any>(null);
     const [email, setEmail] = useState('');
+    const [filename, setFilename] = useState('');
+    const [uploading, setUplading] = useState(false);
     const onDrop = useCallback((acceptedFiles: any) => {
         // console.log(acceptedFiles)
         setFile(acceptedFiles[0])
@@ -16,18 +23,84 @@ const page = () => {
     const removeFile = () => {
         setFile(null)
     }
+
+    const viewFile = () => { }
+
+    const handleuploadFile = async (e: any) => {
+        e.preventDefault();
+        console.log(email);
+        console.log(filename);
+        console.log(file);
+        if (!email) {
+            toast.error("Please Fill all the feild");
+            return;
+        }
+        if (!file) {
+            toast.error("Please select a file ");
+            return;
+        }
+        let formdata = new FormData();
+
+        formdata.append('recievemail', email);
+        formdata.append('filename', filename);
+
+        if (file) {
+            formdata.append('clientfile', file)
+        }
+        setUplading(true);
+        let req = new XMLHttpRequest();
+        req.open('POST', process.env.NEXT_PUBLIC_API_URL + '/file/sharefile', true);
+        req.withCredentials = true;
+
+        req.onreadystatechange = function () {
+            if (req.readyState === 4) {
+                setUplading(false);
+                if (req.status === 200) {
+                    toast.success("File shared successfully");
+                    router.push('/myfiles')
+                }
+                else {
+                    toast.error("File Upload failed");
+                }
+            }
+        }
+        req.send(formdata)
+
+    }
+
+
     return (
-        <div className="flex items-center justify-center min-h-screen ">
+        <div className="flex items-center justify-center min-h-screen">
             <div className="w-full max-w-md bg-white rounded-lg  p-[42px] shadow-md bg-gradient-to-br from-pink-300 to-blue-500">
                 <h2 className="text-2xl font-bold mb-6 text-center">Drop your file here</h2>
                 <form className="flex flex-col">
+                    {
+                        uploading && <div className='top-20 m-auto' style={{
+                            width: 150
+                        }}>
+
+                            <Lottie animationData={Animation} loop={true} />
+                        </div>
+                    }
+
                     <input
                         type="text"
                         id="username"
                         name="email"
-                        placeholder="Email"
+                        placeholder="Please enter receiver's email ..."
                         required
+                        value={email}
                         onChange={e => setEmail(e.target.value)}
+                        className="p-2 mb-4 border-2 border-gray-300 rounded focus:outline-none focus:border-[#fb509a]"
+                    />
+                    <input
+                        type="text"
+                        id="filename"
+                        name="filename"
+                        placeholder="Please enter filename ..."
+                        required
+                        value={filename}
+                        onChange={e => setFilename(e.target.value)}
                         className="p-2 mb-4 border-2 border-gray-300 rounded focus:outline-none focus:border-[#fb509a]"
                     />
                     {
@@ -61,12 +134,13 @@ const page = () => {
                             </div>
                     }
 
-                    {/* <button
+                    <button
+                        onClick={handleuploadFile}
                         type="submit"
-                        className="bg-gradient-to-br from-pink-500 to-blue-300  text-white p-2 border-none rounded-lg cursor-pointer transition duration-300 "
+                        className="bg-gradient-to-br from-pink-500 to-blue-300 mt-4 text-white p-2 border-none rounded-lg cursor-pointer transition duration-300 "
                     >
-                        Clcik to drop ...
-                    </button> */}
+                        Send
+                    </button>
                 </form>
             </div>
         </div>

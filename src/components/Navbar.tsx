@@ -10,22 +10,22 @@ const Navbar = () => {
     const dispatch = useDispatch<AppDispatch>();
     const pathname = usePathname();
     const router = useRouter();
-    // const checkLogin = async () => {
-    //     let res = await fetch(process.env.NEXT_PUBLIC_API_URL + '/auth/checklogin', {
-    //         method: 'GET',
-    //         credentials: 'include'
-    //     })
-    //     let data = await res.json();
-    //     if (!data.ok) {
-    //         dispatch(logOut());
-    //     }
-    //     else {
-    //         getUserData();
-    //     }
-    // }
-    // useEffect(() => {
-    //     checkLogin();
-    // }, []);
+    const checkLogin = async () => {
+        let res = await fetch(process.env.NEXT_PUBLIC_API_URL + '/auth/checklogin', {
+            method: 'GET',
+            credentials: 'include'
+        })
+        let data = await res.json();
+        if (!data.ok) {
+            dispatch(logOut());
+        }
+        else {
+            getUserData();
+        }
+    }
+    useEffect(() => {
+        checkLogin();
+    }, []);
     const getUserData = async () => {
         let res = await fetch(process.env.NEXT_PUBLIC_API_URL + '/auth/getuser', {
             method: 'GET',

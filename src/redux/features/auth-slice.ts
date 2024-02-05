@@ -18,7 +18,6 @@ export const auth = createSlice({
             state.user = action.payload;
         },
         logOut: (state) => {
-            console.log("Log out");
             state.isAuth = false;
             state.user = null
         }
