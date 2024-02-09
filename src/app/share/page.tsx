@@ -2,7 +2,6 @@
 import React, { useState, useCallback } from 'react'
 import { AppDispatch, useAppSelector } from '@/redux/store'
 import { useDropzone } from 'react-dropzone'
-
 import { FaFileUpload } from "react-icons/fa";
 import { CiImport } from "react-icons/ci";
 import { MdDelete } from "react-icons/md";
@@ -10,7 +9,6 @@ import { FaEye } from "react-icons/fa";
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify'
 import Lottie from "lottie-react";
-import { io } from 'socket.io-client'
 import Animation from "../../../public/Animation - 1707124384803.json"
 
 let socket: any = null;
@@ -80,7 +78,7 @@ const page = () => {
         req.upload.addEventListener('load', () => {
             console.log('Upload complete!');
 
-            toast.success('File uploaded successfully');
+            // toast.success('File uploaded successfully');
         });
         req.upload.addEventListener('error', (error) => {
             console.error('Upload failed:', error);
@@ -96,34 +94,30 @@ const page = () => {
                 setUplading(false);
                 if (req.status === 200) {
                     toast.success('File shared successfully');
-                    // socket.emit('uploaded', {
-                    //     from: auth.user.email,
-                    //     to: email,
-                    // })
-                    router.push('/myfiles');
+                    setTimeout(() => {
+
+                        router.push('/myfiles');
+                    }, 2000)
                 } else {
                     toast.error('File upload failed');
                 }
             }
         }
-
         req.send(formdata);
-
     }
-
     return (
         <div className="flex items-center justify-center min-h-screen">
             <div className="w-full max-w-md bg-white rounded-lg  p-[42px] shadow-md bg-gradient-to-br from-pink-300 to-blue-500">
                 <h2 className="text-2xl font-bold mb-6 text-center">Drop your file here</h2>
                 <form className="flex flex-col">
-                    {/* {
+                    {
                         uploading && <div className='top-20 m-auto' style={{
                             width: 150
                         }}>
 
                             <Lottie animationData={Animation} loop={true} />
                         </div>
-                    } */}
+                    }
 
                     <input
                         type="text"

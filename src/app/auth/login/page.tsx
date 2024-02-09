@@ -49,8 +49,10 @@ const Page = () => {
         let data = await res.json();
         if (data.ok) {
             toast.success('Login Successful')
-            router.push('/myfiles')
-            //    await getUserData();
+            setTimeout(() => {
+                router.push('/myfiles')
+            }, 4000)
+            getUserData();
         }
         else {
             toast.error(data.message);
@@ -64,7 +66,10 @@ const Page = () => {
         let data = await res.json();
         if (data.ok) {
             dispatch(logIn(data.data));
-            router.push('/myfiles')
+            setTimeout(() => {
+
+                router.push('/myfiles')
+            }, 2000)
         }
         else {
             dispatch(logOut());

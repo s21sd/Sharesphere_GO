@@ -9,6 +9,8 @@ import { AppDispatch, useAppSelector } from '@/redux/store'
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
+import Lottie from "lottie-react";
+import Animation from "../../../public/Animation - 1707509858192.json"
 const page = () => {
   interface File {
     createdAt: string;
@@ -26,6 +28,9 @@ const page = () => {
   const auth = useAppSelector((state) => state.authReducer)
   const [allFiles, setAllFiles] = useState<File[]>([])
   const router = useRouter();
+  useEffect(() => {
+    getAllFiles();
+  }, [])
   const getAllFiles = async () => {
     let res = await fetch(process.env.NEXT_PUBLIC_API_URL + '/file/getfiles', {
       method: 'GET',
@@ -35,75 +40,84 @@ const page = () => {
     if (data.ok) {
       setAllFiles(data.data);
       toast.success("Fetched files Successfully")
-      console.log(data.data);
+      // console.log(data.data);
     }
-    // else {
-    //   toast.error("Error in fetching the files")
-    // }
+    else {
+      toast.error("Error in fetching the files")
+    }
   }
 
-  useEffect(() => {
-    getAllFiles();
-  }, [])
+  const formatSharedAt = (dateString: string) => {
+    const sharedAtDate = new Date(dateString);
+    return sharedAtDate.toLocaleString();
+  }
+
 
   return (
 
     auth.isAuth ? (
-      <div>
-        <div>
-          <div className="px-5 py-14 mx-auto">
-            <div className=" w-full mx-auto overflow-auto">
-              <table className="table-auto w-full text-left whitespace-no-wrap m-[20px] p-[20px] rounded-xl bg-gradient-to-br from-pink-300 to-blue-500">
-                <thead>
-                  <tr className='font-bold text-2xl px-8 py-5'>
-                    <th className="font-bold text-2xl px-4 py-3">Filename</th>
-                    <th className="font-bold text-2xl px-4 py-3">File Type</th>
-                    <th className="font-bold text-2xl px-4 py-3">Sender Email</th>
-                    <th className="font-bold text-2xl px-4 py-3">Receiver Email</th>
-                    <th className="font-bold text-2xl px-4 py-3">Shared At</th>
-                    <th className="font-bold text-2xl px-4 py-3">View</th>
-                  </tr>
-                </thead>
-                {
-                  allFiles.map((file, index) => {
-                    return (
-                      <tbody key={index} className='mt-10'>
-                        <tr>
-                          <td className="px-4 py-3 font-bold text-xl">{file.filename}</td>
-                          <td className="px-4 py-3">
-                            {
-                              file.fileurl.split('.').pop()?.toLowerCase() === 'video' && <FaVideo size={32} />
-                            }
-                            {
-                              file.fileurl.split('.').pop()?.toLowerCase() === 'text' && <IoDocumentText size={32} />
-                            }
-                            {
-                              file.fileurl.split('.').pop()?.toLowerCase() === 'png' && <FaFileImage size={32} />
-                            }
-                            {
-                              file.fileurl.split('.').pop()?.toLowerCase() === 'document' && <FaRegFilePdf size={32} />
-                            }
-                          </td>
-                          <td className="px-4 py-3">{file.senderemail}</td>
-                          <td className="px-4 py-3 text-lg text-gray-900">{file.receiveremail}</td>
-                          <td className="px-4 py-3 text-lg text-gray-900">{file.sharedAt}</td>
-                          <td className="px-4 py-3 text-lg text-gray-900"><FaEye className='cursor-pointer' size={32} /></td>
 
-                        </tr>
-                      </tbody>
-                    )
-                  })
-                }
+      <div className='flex justify-center items-center w-full mx-auto overflow-x-auto min-h-[40%]'>
 
-              </table>
-            </div>
+        <div className='mt-[5%]'>
 
-          </div>
+          <table className="p-[20px] w-[100%] rounded-xl bg-gradient-to-br from-pink-300 to-blue-500">
+            <thead>
+              <tr className='font-bold text-2xl px-4 py-3'>
+                <th className="font-bold text-xl px-4 py-3">Filename</th>
+                <th className="font-bold text-xl px-4 py-3">File Type</th>
+                <th className="font-bold text-xl px-4 py-3">Sender Email</th>
+                <th className="font-bold text-xl px-4 py-3">Receiver Email</th>
+                <th className="font-bold text-xl px-4 py-3">Shared At</th>
+                <th className="font-bold text-xl px-4 py-3">View</th>
+              </tr>
+            </thead>
+            {
+              allFiles
+                .sort((a, b) => {
+                  return new Date(b.sharedAt).getTime() - new Date(a.sharedAt).getTime();
+                })
+                .map((file, index) => {
+                  return (
+                    <tbody key={index} className='mt-10'>
+                      <tr>
+                        <td className="px-4 py-3 font-bold text-xl">{file.filename}</td>
+                        <td className="px-4 py-3">
+                          {
+                            file.fileurl.split('.').pop()?.toLowerCase() === 'mp4' && <FaVideo size={32} />
+                          }
+                          {
+                            file.fileurl.split('.').pop()?.toLowerCase() === 'txt' && <IoDocumentText size={32} />
+                          }
+                          {
+                            (file.fileurl.split('.').pop()?.toLowerCase() === 'png' || file.fileurl.split('.').pop()?.toLowerCase() === 'jpg' || file.fileurl.split('.').pop()?.toLowerCase() === 'jpeg') && <FaFileImage size={32} />
+                          }
+                          {
+                            file.fileurl.split('.').pop()?.toLowerCase() === 'pdf' && <FaRegFilePdf size={32} />
+                          }
+                        </td>
+                        <td className="px-4 py-3">{file.senderemail}</td>
+                        <td className="px-4 py-3 text-lg text-gray-900">{file.receiveremail}</td>
+                        <td className="px-4 py-3 text-lg text-gray-900">{formatSharedAt(file.sharedAt)}</td>
+                        <td className="px-4 py-3 text-lg text-gray-900"><FaEye className='cursor-pointer' size={32} /></td>
+
+                      </tr>
+                    </tbody>
+                  )
+                })
+            }
+
+          </table>
         </div>
-
       </div>
-    ) : <div>
-      <h1>No Files Here... !</h1>
+
+    ) : <div className='grid justify-center items-center mt-20'>
+      <div className='ml-10' style={{
+        width: 250
+      }}>
+        <Lottie animationData={Animation} loop={true} />
+      </div>
+      <h1 className='text-center font-semibold text-2xl '>No Files Here... ! Please Login 🫠</h1>
 
     </div>
 

@@ -57,7 +57,7 @@ const Navbar = () => {
         let data = await res.json()
         if (data.ok) {
             dispatch(logOut())
-            router.push('/login')
+            router.push('/auth/login')
         }
 
     }
