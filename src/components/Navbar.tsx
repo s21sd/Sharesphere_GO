@@ -15,17 +15,22 @@ const Navbar = () => {
             method: 'GET',
             credentials: 'include'
         })
-        let data = await res.json();
+
+        let data = await res.json()
         if (!data.ok) {
-            dispatch(logOut());
+            dispatch(logOut())
         }
         else {
-            getUserData();
+            getUserData()
         }
+
     }
+
     useEffect(() => {
-        checkLogin();
-    }, []);
+        checkLogin()
+    }, [])
+    console.log(auth)
+
     const getUserData = async () => {
         let res = await fetch(process.env.NEXT_PUBLIC_API_URL + '/auth/getuser', {
             method: 'GET',
@@ -34,28 +39,27 @@ const Navbar = () => {
             },
             credentials: 'include'
         })
-        let data = await res.json();
+
+        let data = await res.json()
         if (data.ok) {
-            dispatch(logIn(data.data));
+            dispatch(logIn(data.data))
+
         }
         else {
-            dispatch(logOut());
-
+            dispatch(logOut())
         }
-
     }
-    const handleLogout = async (e: any) => {
-        e.preventDefault();
+    const handleLogout = async () => {
         let res = await fetch(process.env.NEXT_PUBLIC_API_URL + '/auth/logout', {
             method: 'POST',
             credentials: 'include'
-
         })
-        let data = await res.json();
+        let data = await res.json()
         if (data.ok) {
-            dispatch(logOut());
-            router.push('/auth/login')
+            dispatch(logOut())
+            router.push('/login')
         }
+
     }
     return (
         <div className="container mx-auto mt-4 flex flex-wrap p-5 flex-col md:flex-row items-center">

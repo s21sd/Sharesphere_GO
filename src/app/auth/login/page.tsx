@@ -48,9 +48,9 @@ const Page = () => {
         })
         let data = await res.json();
         if (data.ok) {
-            toast.success('Login')
+            toast.success('Login Successful')
             router.push('/myfiles')
-        //    await getUserData();
+            //    await getUserData();
         }
         else {
             toast.error(data.message);
