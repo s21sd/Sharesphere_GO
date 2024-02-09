@@ -1,36 +1,78 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# File Sharing App
 
-## Getting Started
+Welcome to the File Sharing App! This application allows users to securely share various types of files with just the recipient's email address. Users can upload and view files like videos, audios, texts, images, and PDFs. It features authentication functionalities for user registration, login, and logout. The app is built using Next.js, React, TypeScript, Lottie Animation, Express, and MongoDB Atlas.
 
-First, run the development server:
+## Features
+
+- User Registration: Users can sign up for an account by providing their email and password.
+- User Login: Registered users can log in to their accounts using their credentials.
+- User Logout: Users can securely log out of their accounts.
+- File Upload: Authenticated users can upload various types of files to the platform.
+- File Viewing: Users can view files shared with them by entering the sender's email address.
+- File Types Supported: The app supports sharing and viewing of videos, audios, texts, images, and PDFs.
+
+## Technologies Used
+
+- Next.js
+- React
+- TypeScript
+- Lottie Animation
+- Express
+- MongoDB Atlas
+- NodeMailer
+
+## Installation
+
+1. Clone the repository:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/your-username/file-sharing-app.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Navigate to the project directory:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+cd file-sharing-app
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+3. Install dependencies for both the client and server:
 
-## Learn More
+```bash
+cd client
+npm install
+cd ../server
+npm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+4. Set up environment variables:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   - Create a `.env` file in both the `client` and `server` directories.
+   - Refer to `.env.example` files in each directory for the required environment variables.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+5. Start the server:
 
-## Deploy on Vercel
+```bash
+cd ../server
+npm start
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+6. Start the client:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```bash
+cd ../client
+npm start
+```
+
+7. Access the application in your browser at `http://localhost:3000`.
+
+## Usage
+
+1. Register for an account by providing your email and password.
+2. Log in to your account.
+3. Upload files by clicking on the upload button and selecting the desired files.
+4. View files by entering the sender's email address.
+
+## Contributing
+
+Contributions are welcome! Please feel free to open issues or submit pull requests.
+
