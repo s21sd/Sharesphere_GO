@@ -79,9 +79,9 @@ const Page = () => {
     }
     return (
         <div className="flex items-center justify-center min-h-screen ">
-            <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-md bg-gradient-to-br from-pink-300 to-blue-500">
+            <div className="w-[95%] max-w-md bg-white p-8 rounded-lg shadow-md bg-gradient-to-br from-pink-300 to-blue-500">
                 <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
-                <form className="flex flex-col">
+                <form className="flex flex-col space-y-4">
                     <input
                         type="text"
                         id="username"

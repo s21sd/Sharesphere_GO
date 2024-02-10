@@ -88,7 +88,7 @@ const Page = () => {
           <Lottie className='absolute top-16' animationData={Animation} loop={true} /> :
           <></>
       }
-      <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-md bg-gradient-to-br from-pink-300 to-blue-500">
+      <div className="w-[95%] max-w-md bg-white p-8 rounded-lg shadow-md bg-gradient-to-br from-pink-300 to-blue-500">
         <h2 className="text-2xl font-bold mb-6 text-center">Sign Up</h2>
         <form className="flex flex-col">
           <input
@@ -120,7 +120,7 @@ const Page = () => {
               className="p-2 border-2 w-[74%] border-gray-300 rounded focus:outline-none focus:border-[#fb509a]"
             />
             {
-              !sendingOTP ? <button className='bg-gradient-to-br from-pink-500 to-blue-300  text-white p-2 border-none rounded-lg cursor-pointer transition duration-300 ' onClick={sendOTP}>Send OTP</button>
+              !sendingOTP ? <button className=' bg-gradient-to-br from-pink-500 to-blue-300  text-white lg:p-2 border-none rounded-lg cursor-pointer transition duration-300 md:p-1' onClick={sendOTP}>Send OTP</button>
                 : <button className='bg-gray-300  text-white p-2 border-none rounded-lg transition duration-300 cursor-not-allowed'>Sending</button>
 
             }

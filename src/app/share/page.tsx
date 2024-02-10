@@ -5,7 +5,6 @@ import { useDropzone } from 'react-dropzone'
 import { FaFileUpload } from "react-icons/fa";
 import { CiImport } from "react-icons/ci";
 import { MdDelete } from "react-icons/md";
-import { FaEye } from "react-icons/fa";
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify'
 import Lottie from "lottie-react";
@@ -31,8 +30,6 @@ const page = () => {
     const removeFile = () => {
         setFile(null)
     }
-
-    const viewFile = () => { }
 
     const handleuploadFile = async (e: any) => {
         e.preventDefault();
@@ -77,7 +74,6 @@ const page = () => {
 
         req.upload.addEventListener('load', () => {
             console.log('Upload complete!');
-
             // toast.success('File uploaded successfully');
         });
         req.upload.addEventListener('error', (error) => {
@@ -94,10 +90,12 @@ const page = () => {
                 setUplading(false);
                 if (req.status === 200) {
                     toast.success('File shared successfully');
+                    setUplading(false);
                     setTimeout(() => {
 
                         router.push('/myfiles');
                     }, 2000)
+
                 } else {
                     toast.error('File upload failed');
                 }
@@ -107,7 +105,7 @@ const page = () => {
     }
     return (
         <div className="flex items-center justify-center min-h-screen">
-            <div className="w-full max-w-md bg-white rounded-lg  p-[42px] shadow-md bg-gradient-to-br from-pink-300 to-blue-500">
+            <div className="w-[95%] max-w-md bg-white rounded-lg  p-[42px] shadow-md bg-gradient-to-br from-pink-300 to-blue-500">
                 <h2 className="text-2xl font-bold mb-6 text-center">Drop your file here</h2>
                 <form className="flex flex-col">
                     {
@@ -148,7 +146,7 @@ const page = () => {
 
                             </div>
                             <div className='flex justify-center gap-1'>
-                                <FaEye size={32} />
+
                                 <MdDelete onClick={removeFile} size={32} />
                             </div>
                         </div> :

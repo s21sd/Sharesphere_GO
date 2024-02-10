@@ -11,6 +11,7 @@ import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
 import Lottie from "lottie-react";
 import Animation from "../../../public/Animation - 1707509858192.json"
+
 const page = () => {
   interface File {
     createdAt: string;
@@ -39,7 +40,7 @@ const page = () => {
     let data = await res.json();
     if (data.ok) {
       setAllFiles(data.data);
-      toast.success("Fetched files Successfully")
+      // toast.success("Fetched files Successfully")
       // console.log(data.data);
     }
     else {
@@ -53,11 +54,13 @@ const page = () => {
   }
 
 
+
   return (
 
     auth.isAuth ? (
 
       <div className='flex justify-center items-center w-full mx-auto overflow-x-auto min-h-[40%]'>
+
 
         <div className='mt-[5%]'>
 
@@ -99,8 +102,10 @@ const page = () => {
                         <td className="px-4 py-3">{file.senderemail}</td>
                         <td className="px-4 py-3 text-lg text-gray-900">{file.receiveremail}</td>
                         <td className="px-4 py-3 text-lg text-gray-900">{formatSharedAt(file.sharedAt)}</td>
-                        <td className="px-4 py-3 text-lg text-gray-900"><FaEye className='cursor-pointer' size={32} /></td>
 
+                        <a href={`http://localhost:5000/` + file.fileurl} target="_blank" rel="noopener noreferrer">
+                          <td className="px-4 py-3 text-lg text-gray-900"><FaEye className='cursor-pointer' size={32} /></td>
+                        </a>
                       </tr>
                     </tbody>
                   )
@@ -131,37 +136,3 @@ export default page
 
 
 
-
-
-
-
-
-// <div key={index} className=' m-[20px] p-[20px] rounded-xl bg-gradient-to-br from-pink-300 to-blue-500'>
-//   <div className='flex justify-between items-center flex-1'>
-//     <div className='flex justify-between items-center gap-5'>
-
-//       {
-//         file.filetype === 'video' && <FaVideo size={32} />
-//       }
-//       {
-//         file.filetype === 'text' && <IoDocumentText size={32} />
-//       }
-//       {
-//         file.filetype === 'image' && <FaFileImage size={32} />
-//       }
-//       {
-//         file.filetype === 'document' && <FaRegFilePdf size={32} />
-//       }
-
-//       <h1>{file.filename}</h1>
-//       <p>{file.senderemail}</p>
-//       <p>{file.receiveremail}</p>
-//       <p>{file.sharedAt}</p>
-//       <p>{file.fileurl.split('.').pop()?.toLowerCase()}</p>
-//     </div>
-
-//     <div>
-//       <FaEye className='cursor-pointer' size={32} />
-//     </div>
-//   </div>
-// </div>
