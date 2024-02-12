@@ -34,7 +34,7 @@ const LiPage = () => {
             toast.error('Please fill all the fields');
             return
         }
-        let res = await fetch(process.env.NEXT_PUBLIC_API_URL + '/auth/login', {
+        let res = await fetch(process.env.BACKEND_API_URL + '/auth/login', {
             method: 'POST',
             body: JSON.stringify({
                 email: formData.email,
@@ -59,7 +59,7 @@ const LiPage = () => {
         }
     }
     const getUserData = async () => {
-        let res = await fetch(process.env.NEXT_PUBLIC_API_URL + '/auth/getuser', {
+        let res = await fetch(process.env.BACKEND_API_URL + '/auth/getuser', {
             method: 'GET',
             credentials: 'include'
         })

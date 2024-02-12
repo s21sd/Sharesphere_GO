@@ -58,7 +58,7 @@ const Shpage = () => {
 
         setUplading(true);
         let req = new XMLHttpRequest();
-        req.open('POST', process.env.NEXT_PUBLIC_API_URL + '/file/sharefile', true);
+        req.open('POST', process.env.BACKEND_API_URL + '/file/sharefile', true);
         req.withCredentials = true;
 
 

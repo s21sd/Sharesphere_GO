@@ -30,7 +30,7 @@ const SiPage = () => {
   const sendOTP = async (e: any) => {
     e.preventDefault();
     setSendingOTP(true);
-    let res = await fetch(process.env.NEXT_PUBLIC_API_URL + '/auth/sendotp', {
+    let res = await fetch(process.env.BACKEND_API_URL + '/auth/sendotp', {
       method: 'POST',
       body: JSON.stringify({ email: formData.email }),
       headers: {
@@ -64,7 +64,8 @@ const SiPage = () => {
     if (imgfile) {
       formdata.append('clientfile', imgfile)
     }
-    let res = await fetch(process.env.NEXT_PUBLIC_API_URL + '/auth/register', {
+    let res = await fetch(process.env.BACKEND_API_URL
+       + '/auth/register', {
       method: 'POST',
       body: formdata,
       credentials: 'include'
