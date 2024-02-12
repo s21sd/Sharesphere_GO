@@ -43,7 +43,7 @@ const LiPage = () => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            credentials: 'include'
+           
 
         })
         let data = await res.json();
@@ -61,7 +61,7 @@ const LiPage = () => {
     const getUserData = async () => {
         let res = await fetch("https://sharesphered.onrender.com" + '/auth/getuser', {
             method: 'GET',
-            credentials: 'include'
+           
         })
         let data = await res.json();
         if (data.ok) {
