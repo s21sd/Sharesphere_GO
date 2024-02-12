@@ -37,7 +37,7 @@ const Navbar = () => {
     const checkLogin = async () => {
         let res = await fetch("https://sharesphered.onrender.com" + '/auth/checklogin', {
             method: 'GET',
-            credentials: 'include'
+            
         });
 
         let data = await res.json();
@@ -58,7 +58,7 @@ const Navbar = () => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            credentials: 'include'
+            
         });
 
         let data = await res.json();
@@ -70,9 +70,9 @@ const Navbar = () => {
     };
 
     const handleLogout = async () => {
-        let res = await fetch(process.env.BACKEND_API_URL + '/auth/logout', {
+        let res = await fetch("https://sharesphered.onrender.com" + '/auth/logout', {
             method: 'POST',
-            credentials: 'include'
+           
         });
         let data = await res.json();
         if (data.ok) {

@@ -58,8 +58,8 @@ const Shpage = () => {
 
         setUplading(true);
         let req = new XMLHttpRequest();
-        req.open('POST', process.env.BACKEND_API_URL + '/file/sharefile', true);
-        req.withCredentials = true;
+        req.open('POST', "https://sharesphered.onrender.com" + '/file/sharefile', true);
+        // req.withCredentials = true;
 
 
         req.upload.addEventListener('progress', (event) => {

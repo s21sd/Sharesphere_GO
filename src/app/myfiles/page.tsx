@@ -35,7 +35,6 @@ const Mpage = () => {
   const getAllFiles = async () => {
     let res = await fetch("https://sharesphered.onrender.com" + '/file/getfiles', {
       method: 'GET',
-      credentials: 'include'
     })
     let data = await res.json();
     if (data.ok) {

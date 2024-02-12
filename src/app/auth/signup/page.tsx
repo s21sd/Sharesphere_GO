@@ -30,13 +30,13 @@ const SiPage = () => {
   const sendOTP = async (e: any) => {
     e.preventDefault();
     setSendingOTP(true);
-    let res = await fetch(process.env.BACKEND_API_URL + '/auth/sendotp', {
+    let res = await fetch("https://sharesphered.onrender.com" + '/auth/sendotp', {
       method: 'POST',
       body: JSON.stringify({ email: formData.email }),
       headers: {
         'Content-Type': 'application/json'
       },
-      credentials: 'include'
+       
     })
 
     let data = await res.json();
@@ -64,11 +64,11 @@ const SiPage = () => {
     if (imgfile) {
       formdata.append('clientfile', imgfile)
     }
-    let res = await fetch(process.env.BACKEND_API_URL
-       + '/auth/register', {
+    let res = await fetch('https://sharesphered.onrender.com'
+      + '/auth/register', {
       method: 'POST',
       body: formdata,
-      credentials: 'include'
+
     })
 
     let data = await res.json()
