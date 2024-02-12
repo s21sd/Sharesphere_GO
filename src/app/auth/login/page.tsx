@@ -59,7 +59,7 @@ const LiPage = () => {
         }
     }
     const getUserData = async () => {
-        let res = await fetch(process.env.BACKEND_API_URL + '/auth/getuser', {
+        let res = await fetch("https://sharesphered.onrender.com" + '/auth/getuser', {
             method: 'GET',
             credentials: 'include'
         })

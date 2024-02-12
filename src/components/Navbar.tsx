@@ -35,7 +35,7 @@ const Navbar = () => {
     const [openi, setOpen] = useState(false);
 
     const checkLogin = async () => {
-        let res = await fetch(process.env.BACKEND_API_URL + '/auth/checklogin', {
+        let res = await fetch("https://sharesphered.onrender.com" + '/auth/checklogin', {
             method: 'GET',
             credentials: 'include'
         });
@@ -53,7 +53,7 @@ const Navbar = () => {
     }, []);
 
     const getUserData = async () => {
-        let res = await fetch(process.env.BACKEND_API_URL + '/auth/getuser', {
+        let res = await fetch("https://sharesphered.onrender.com" + '/auth/getuser', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

@@ -33,7 +33,7 @@ const Mpage = () => {
     getAllFiles();
   }, [])
   const getAllFiles = async () => {
-    let res = await fetch(process.env.BACKEND_API_URL + '/file/getfiles', {
+    let res = await fetch("https://sharesphered.onrender.com" + '/file/getfiles', {
       method: 'GET',
       credentials: 'include'
     })
