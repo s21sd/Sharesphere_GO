@@ -12,7 +12,7 @@ interface FormData {
     password: string;
 }
 
-const Page = () => {
+const LiPage = () => {
     const router = useRouter();
     const auth = useAppSelector((state) => state.authReducer);
     const dispatch = useDispatch<AppDispatch>();
@@ -120,4 +120,4 @@ const Page = () => {
     );
 };
 
-export default Page;
+export default LiPage;

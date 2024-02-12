@@ -11,7 +11,7 @@ interface FormData {
   password: string;
 
 }
-const Page = () => {
+const SiPage = () => {
   const router = useRouter();
   const [imgfile, setImgFile] = useState<File | null>(null)
   const [formData, setFormData] = useState<FormData>({
@@ -161,4 +161,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default SiPage;

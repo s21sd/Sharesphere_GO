@@ -11,7 +11,7 @@ import Lottie from "lottie-react";
 import Animation from "../../../public/Animation - 1707124384803.json"
 
 let socket: any = null;
-const page = () => {
+const Shpage = () => {
     const auth = useAppSelector((state) => state.authReducer)
     const router = useRouter();
 
@@ -181,4 +181,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Shpage

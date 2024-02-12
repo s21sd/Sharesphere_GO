@@ -1,9 +1,9 @@
 import React from 'react'
 
-const page = () => {
+const Lopage = () => {
     return (
         <div>Logout</div>
     )
 }
 
-export default page
+export default Lopage

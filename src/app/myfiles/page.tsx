@@ -12,7 +12,7 @@ import { useRouter } from 'next/navigation';
 import Lottie from "lottie-react";
 import Animation from "../../../public/Animation - 1707509858192.json"
 
-const page = () => {
+const Mpage = () => {
   interface File {
     createdAt: string;
     filename: string;
@@ -126,7 +126,7 @@ const page = () => {
   )
 }
 
-export default page
+export default Mpage
 
 
 
