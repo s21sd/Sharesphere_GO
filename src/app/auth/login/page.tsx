@@ -34,7 +34,7 @@ const LiPage = () => {
             toast.error('Please fill all the fields');
             return
         }
-        let res = await fetch(process.env.BACKEND_API_URL + '/auth/login', {
+        let res = await fetch("https://sharesphered.onrender.com" + '/auth/login', {
             method: 'POST',
             body: JSON.stringify({
                 email: formData.email,
